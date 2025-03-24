@@ -28,7 +28,7 @@ const handleSubmit = async () => {
     profilePicture: profilePicture.value,
   }
 
-  const response = await uploadWithFile(data, "post", "/api/test", "profilePicture");
+  const response = await uploadWithFile(data, "post", "/api/image", "profilePicture");
   console.log(response);
 };
 

@@ -1,5 +1,7 @@
 using PapenChat.Framework;
+using PapenChat.Framework.Storage;
 using PapenChat.Models;
+using PapenChat.Utils;
 
 namespace PapenChat.Routes {
     public class Api {
@@ -17,6 +19,18 @@ namespace PapenChat.Routes {
 
                 return new Response().JSON(new Dictionary<string, object> {
                     {"message", user}
+                });
+            });
+
+            Router.APIPost("/image", (Request req) => {
+                string image = req.data["profilePicture"].Split(",")[1];
+
+                var imageDataArr = FileUtils.Base64ToByteArray(image);
+
+                StorageController.controller.SaveFile("pfp", "test.png", new MemoryStream(imageDataArr));
+
+                return new Response().JSON(new Dictionary<string, object> {
+                    {"message", "Hello from Api!"}
                 });
             });
         }
