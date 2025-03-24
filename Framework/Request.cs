@@ -15,13 +15,16 @@ namespace PapenChat.Framework {
             string[] requestLineParts = requestLine.Split(' ');
             method = requestLineParts[0];
             path = requestLineParts[1];
+
             this.headers = new Dictionary<string, string>();
             foreach (string header in headers) {
                 string[] headerParts = header.Split(": ");
                 this.headers[headerParts[0]] = headerParts[1];
             }
+
             contentType = this.headers.TryGetValue("Content-Type", out string? value) ? value : "text/plain";
             this.body = body;
+            
             data = ParseBody();
         }
 
