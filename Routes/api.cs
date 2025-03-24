@@ -1,4 +1,5 @@
 using PapenChat.Framework;
+using PapenChat.Models;
 
 namespace PapenChat.Routes {
     public class Api {
@@ -10,11 +11,12 @@ namespace PapenChat.Routes {
             });
 
             Router.APIPost("/test", (Request req) => {
-                foreach (var key in req.data.Keys) {
-                    Console.WriteLine(key + ": " + req.data[key]);
-                }
+                Task<Users> userTask = Users.FindAsync(1);
+
+                var user = userTask.Result;
+
                 return new Response().JSON(new Dictionary<string, object> {
-                    {"message", req.body}
+                    {"message", user}
                 });
             });
         }
