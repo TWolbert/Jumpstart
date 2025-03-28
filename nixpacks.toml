@@ -1,14 +1,18 @@
-[phases.setup]
-nixPkgs = ["dotnet-sdk_8", "dotnet-aspnetcore_8"]
+[build]
+builder = "mcr.microsoft.com/dotnet/sdk:8.0"
+app_dir = "/app"
+build_cmd = "dotnet publish -c Release -o /app/publish"
 
-[phases.build]
-cacheDirs = ["~/.nuget/packages"]
-cmds = [
-  "dotnet restore",
-  "dotnet publish -c Release -o out"
-]
+[run]
+cmd = "dotnet /app/publish/YourApp.dll"
+env = { ASPNETCORE_URLS = "http://0.0.0.0:5000" }
 
-[phases.start]
-cmd = "./out/BackendMVCCustom"
-env.DOTNET_ENVIRONMENT = "Production"
-env.ASPNETCORE_URLS = "http://+:5000"
+[dependencies]
+# Add any other dependencies that are required for your app here
+# For example, you might need to include additional system packages for your app to run correctly.
+
+[platform]
+name = "dotnet"
+
+[logs]
+# Optional logging configuration
