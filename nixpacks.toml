@@ -10,7 +10,5 @@ cmds = [
 
 [phases.start]
 cmd = "./out/BackendMVCCustom"
-env = {
-  "DOTNET_ENVIRONMENT" = "Production",
-  "ASPNETCORE_URLS" = "http://+:5000"
-}
+env.DOTNET_ENVIRONMENT = "Production"
+env.ASPNETCORE_URLS = "http://+:5000"
