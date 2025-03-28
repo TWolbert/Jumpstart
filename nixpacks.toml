@@ -1,0 +1,16 @@
+[phases.setup]
+nixPkgs = ["dotnet-sdk_8", "dotnet-aspnetcore_8"]
+
+[phases.build]
+cacheDirs = ["~/.nuget/packages"]
+cmds = [
+  "dotnet restore",
+  "dotnet publish -c Release -o out"
+]
+
+[phases.start]
+cmd = "./out/BackendMVCCustom"
+env = {
+  "DOTNET_ENVIRONMENT" = "Production",
+  "ASPNETCORE_URLS" = "http://+:5000"
+}
